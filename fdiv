@@ -1,0 +1,58 @@
+#!/bin/bash
+# fdiv takes two integer arguments: numerator and denominator
+# it returns a fixed point number division result to the best possible precision
+# allowed by signed 64 bit integers, rounded to the nearest next digit
+# for example: fdiv -2 3 => -0.666666666666666667
+  
+PROGN=${0##*/}
+MAXINT=922337203685477580 # (2**63-1)/10  [rem 7]
+
+# arguments verification
+NUM=${1:?$PROGN needs numerator as the first argument}
+DENOM=${2:?$PROGN needs denominator as the second argument}
+if ! [[ $NUM =~ ^[+-]?[0-9]+$ ]]; then 
+	printf "$PROGN error: numerator $NUM is not an integer\n"; exit 2; fi
+if ! [[ $DENOM =~ ^[+-]?[0-9]+$ ]]; then 
+	printf "$PROGN error: denominator $DENOM is not an integer\n"; exit 2; fi
+if [ $DENOM -eq 0 ]; then 
+	printf "$PROGN error: denominator must not be zero\n"; exit 2; fi
+	
+# catch trivial result
+if [ $NUM -eq 0 ]; then printf '0.0'; exit 0; fi	
+	
+# handle signs separately and then work only with positive numbers
+if [ $DENOM -lt 0 ]; then let SIGN=-1; let DENOM=-1*$DENOM; else let SIGN=1; fi
+if [ $NUM -lt 0 ]; then let SIGN=-1*$SIGN; let NUM=-1*$NUM; fi
+
+# when numerator is greater than denominator, split ratio and remainder
+if [ "$NUM" -ge "$DENOM" ]; then 
+	let RAT=$NUM/$DENOM
+	let REM=$NUM%$DENOM
+	if [ "$REM" -eq 0 ]; then 
+		printf "%d.0" $RAT 
+		exit 0
+	else NUM=$REM; fi
+else RAT=0; fi
+
+# now work on decimal places of remainder/denominator < 1
+PREC=0
+# reducing denominator gives free extra precision decimal digits 
+# as leading zeroes after the decimal point
+until [ $(( "$DENOM"%10 )) -ne 0 ]; do
+	let DENOM=$DENOM/10
+	let PREC=$PREC+1	
+done
+# now scale up the numerator up to what int64 will allow
+let MAXINT=$MAXINT-$DENOM/2 # maximum numerator without overflow in the last line below
+until [ "$NUM" -gt "$MAXINT" ]; do
+	let NUM=$NUM*10
+	let PREC=$PREC+1
+done
+
+# print negative sign, if any
+if [ $SIGN -lt 0 ]; then printf "-"; fi
+# print saved integer ratio, if any, then decimal point and the decimal digits,
+# padded with leading zeroes after the decimal point, if any
+# adding half the denominator to the numerator gives rounding to the nearest
+printf "%d.%0${PREC}d" $RAT $(( ($NUM+$DENOM/2)/$DENOM ))
+

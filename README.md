@@ -21,7 +21,7 @@ Simply place the script in any directory in your search path, such as $HOME/bin,
 
 - When the numerator is zero, 0.0 is immediately returned.
 
-- Automatically selects and calculates the maximum precision.
+- Automatically selects and calculates the maximum precision. Truncation error wil be less than 5E-20.
 
 - When numerator > denominator, the answer is composed from integral numerator/denominator, followed by remainder/denominator after the decimal point. This further enhances the precision.
 

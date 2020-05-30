@@ -3,7 +3,7 @@
 # it returns a fixed point number division result to the best possible precision
 # allowed by signed 64 bit integers, rounded to the nearest next digit
 # for example: fdiv -2 3 => -0.666666666666666667
-  
+
 PROGN=${0##*/}
 MAXINT=922337203685477580 # (2**63-1)/10  [rem 7]
 

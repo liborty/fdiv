@@ -8,6 +8,8 @@ This Bash script takes two integer arguments: numerator and denominator.
 
 It returns a fixed point number division result to the best possible precision
  allowed by signed 64 bit integers, rounded to the nearest next digit.
+
+Saves having to use bulky external facilities in subshells, such as `awk,dc,bc` for very simple calculations.
  
 ### Installation
 

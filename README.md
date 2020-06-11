@@ -1,4 +1,4 @@
-# Fdiv - Fixed Point Division for Shell Scripts
+# Fdiv - Fixed Point Division in Shell Scripts
 
 (c) Libor Spacek, 30th May 2020
 

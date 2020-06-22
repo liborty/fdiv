@@ -4,19 +4,25 @@
 
 ### Introduction
 
-This Bash script takes two integer arguments: numerator and denominator.
+**fdiv** bash script takes two integer arguments: numerator and denominator.
 
 It returns a fixed point number division result to the best possible precision
  allowed by signed 64 bit integers, rounded to the nearest next digit.
 
-Saves having to use bulky external facilities in subshells, such as `awk,dc,bc`, for very simple calculations.
+Saves having to use bulky external facilities in subshells, such as `awk,dc,bc`, for very simple calculations. 
+
+**fadd** takes two positive fixed point numbers, such as produced by the above, and adds them up.
+
+Other operators are still to come. 
+
  
 ### Installation
 
-Simply place the **fdiv** script in any directory in your search path, such as $HOME/bin, /usr/local/bin, or specify its path when invoking it. Make sure that it has execute permissions.
+Simply place the **fdiv** and **fadd** scripts in any directory in your search path, such as $HOME/bin, /usr/local/bin, or specify its path when invoking it. Make sure that they have  execute permissions.
  
 ### Example Usage
-   $(fdiv -2 3) returns -0.666666666666666667
+   $(fdiv -2 3) returns -0.666666666666666667  
+   $(fadd 9.876543 0.987) returns 10.863543
    
 ### Features
 

@@ -1,0 +1,47 @@
+#!/bin/bash
+# fadd takes two positive fixed point arguments of the form whole.fract
+# and returns a fixed point number addition result 
+# for example: fadd 9.876543 0.987 10.863543
+
+PROGN=${0##*/}
+MAXINT=9223372036854775807 # 2**63-1
+
+# arguments verification
+NUM1=${1:?$PROGN needs fnum first argument}
+NUM2=${2:?$PROGN needs fnum second argument}
+if ! [[ $NUM1 =~ ^[+-]?[0-9]+[.][0-9]+$ ]]; then 
+	printf "$PROGN error: first argument $NUM1 is not an fnum\n"; exit 2; fi
+if ! [[ $NUM2 =~ ^[+-]?[0-9]+[.][0-9]+$ ]]; then 
+	printf "$PROGN error: second argument $NUM2 is not an fnum\n"; exit 2; fi
+
+# parse both args into whole and fractional parts	
+ARR1=(${NUM1//./ })
+ARR2=(${NUM2//./ })
+F1=${ARR1[1]}
+F2=${ARR2[1]}
+
+# swap fract parts so that $F1 is the longer
+if [[ ${#F1} -lt ${#F2} ]]; then 
+    FT=$F1; F1=$F2; F2=$FT; fi 
+LF2=${#F2} #  save the shorter length
+
+# strip trailing zeroes from the longer F1 while longer
+while [[ ${#F1} -gt "$LF2" ]]; do
+ if [[ ${F1: -1:1} == 0 ]]; then F1=${F1:0:-1}; else break; fi
+done
+LF1=${#F1} # finished chopping F1 now
+
+# and/or pad the shorter F2 with rhs zeroes until of the same length
+while [[ $LF1 -gt ${#F2} ]]; do F2=${F2}0; done
+
+# do the adding 
+WHOLE=$(( ${ARR1[0]}+${ARR2[0]} ))
+FRACT=$(( $F1+$F2 ))
+
+# check for fractional overflow i.e. > 1
+if [[ ${#FRACT} -gt $FL1 ]]; then
+    let WHOLE+=${FRACT:0:1}
+    FRACT=${FRACT:1}
+fi
+expr $WHOLE.$FRACT
+

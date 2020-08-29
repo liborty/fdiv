@@ -1,6 +1,5 @@
 # Fdiv - Fixed Point Division in Shell Scripts
-
-(c) Libor Spacek, 30th May 2020
+![GitHub active](https://img.shields.io/badge/GitHub-Active-brightgreen) ![GitHub last commit](https://img.shields.io/github/last-commit/liborty/fdiv)
 
 ### Introduction
 

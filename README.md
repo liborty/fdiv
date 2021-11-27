@@ -1,4 +1,4 @@
-# Fdiv - Fixed Point Arithmetic in Shell Scripts [<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/liborty/FDIV/HEAD?logo=github">](https://github.com/liborty/FDIV)
+# Fdiv - Fixed Point Arithmetic in Shell Scripts [<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/liborty/fdiv/HEAD?logo=github">](https://github.com/liborty/fdiv)
 
 ## Introduction
 

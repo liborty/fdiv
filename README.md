@@ -1,7 +1,6 @@
-# Fdiv - Fixed Point Division in Shell Scripts
-![GitHub active](https://img.shields.io/badge/GitHub-Active-brightgreen) ![GitHub last commit](https://img.shields.io/github/last-commit/liborty/fdiv)
+# Fdiv - Fixed Point Arithmetic in Shell Scripts [<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/liborty/FDIV/HEAD?logo=github">](https://github.com/liborty/FDIV)
 
-### Introduction
+## Introduction
 
 **fdiv** bash script takes two integer arguments: numerator and denominator.
 
@@ -14,16 +13,18 @@ Saves having to use bulky external facilities in subshells, such as `awk,dc,bc`,
 
 Other operators are still to come. 
 
- 
-### Installation
+## Installation
 
 Simply place the **fdiv** and **fadd** scripts in any directory in your search path, such as $HOME/bin, /usr/local/bin, or specify its path when invoking it. Make sure that they have  execute permissions.
  
 ### Example Usage
+
+```bash
    $(fdiv -2 3) returns -0.666666666666666667  
    $(fadd 9.876543 0.987) returns 10.863543
-   
-### Features
+ ```
+ 
+## Features
 
 - Checks arguments, returns errors if they are missing or not integers or the divisor (denominator) is zero.
 
@@ -33,17 +34,16 @@ Simply place the **fdiv** and **fadd** scripts in any directory in your search p
 
 - When `numerator > denominator,` the answer is composed from integral numerator/denominator result, followed by `remainder/denominator < 1,` which gives the digits after the decimal point. This maintains the 5E-19 precision even when more significant digits are used.
  
-	For example, `$( ./fdiv 500000 3 )` returns 166666.666666666666666667
+	For example, `$( ./fdiv 500000 3 )` returns `166666.666666666666666667`
 
 - When the denominator is divisible by 10, or its multiples, the decimal precision is further increased by the relevant number of decimal digits.
 
-	For example, `$( ./fdiv 5 30000 )` returns 0.0001666666666666666667, where the truncation error is now less than 5E-22
+	For example, `$( ./fdiv 5 30000 )` returns `0.0001666666666666666667`, where the truncation error is now less than 5E-22
 
-- Deals correctly with negative argument(s). 
+- Deals correctly with negative argument(s).
 
-### Further Information
+## References
 
 See comments in the source of **fdiv** for more details.
 
-Here is a [blog](https://oldmill.cz/2020-01-02-the-joy-of-bashing.html) describing the magic idea behind implementing this using only Bash 
-integer arithmetic.
+Here is a [blog](https://oldmill.cz/2020-01-02-the-joy-of-bashing.html) describing the magic idea behind implementing this using only Bash integer arithmetic.

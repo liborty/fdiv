@@ -26,7 +26,7 @@ if [[ ${#F1} -lt ${#F2} ]]; then
 LF2=${#F2} #  save the shorter length
 
 # strip trailing zeroes from the longer F1 while longer
-while [[ ${#F1} -gt "$LF2" ]]; do
+while [[ ${#F1} -gt $LF2 ]]; do
  if [[ ${F1: -1:1} == 0 ]]; then F1=${F1:0:-1}; else break; fi
 done
 LF1=${#F1} # finished chopping F1 now

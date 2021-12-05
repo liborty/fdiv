@@ -38,8 +38,8 @@ while [[ $LF1 -gt ${#F2} ]]; do F2=${F2}0; done
 WHOLE=$(( ${ARR1[0]}+${ARR2[0]} ))
 FRACT=$(( $F1+$F2 ))
 
-# check for fractional overflow i.e. > 1
-if [[ ${#FRACT} -gt $FL1 ]]; then
+# check for fractional overflow i.e. >= 1
+if [[ ${#FRACT} -gt $LF1 ]]; then
     let WHOLE+=${FRACT:0:1}
     FRACT=${FRACT:1}
 fi

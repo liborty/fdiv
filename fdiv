@@ -5,15 +5,15 @@
 # for example: fdiv -2 3 => -0.666666666666666667
 
 PROGN=${0##*/}
-MAXINT=922337203685477580 # (2**63-1)/10  [rem 7]
+MAXINT=922337203685477580 # (2**63-1)/10 
 
 # arguments verification
 NUM=${1:?$PROGN needs numerator as the first argument}
 DENOM=${2:?$PROGN needs denominator as the second argument}
-if ! [[ $NUM =~ ^[+-]?[0-9]+$ ]]; then 
+if ! [[ $NUM =~ ^[+-]?[0-9]+$  ]]; then 
 	printf "$PROGN error: numerator $NUM is not an integer\n"; exit 2; fi
 if ! [[ $DENOM =~ ^[+-]?[0-9]+$ ]]; then 
-	printf "$PROGN error: denominator $DENOM is not an integer\n"; exit 2; fi
+	printf "$PROGN error: denominator $DENOM is not a decimal integer\n"; exit 2; fi
 if [ $DENOM -eq 0 ]; then 
 	printf "$PROGN error: denominator must not be zero\n"; exit 2; fi
 	

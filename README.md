@@ -20,10 +20,12 @@ Simply place the **fdiv** and **fadd** scripts in any directory in your search p
 ### Example Usage
 
 ```bash
-   $(fdiv -2 3) returns -0.666666666666666667  
-   $(fadd 9.876543 0.987) returns 10.863543
+   fdiv -2 3; echo
+   -0.666666666666666667  
+   fadd 9.876543 0.987; echo
+   10.863543
  ```
- 
+
 ## Features
 
 - Checks arguments, returns errors if they are missing or not integers or the divisor (denominator) is zero.
@@ -34,16 +36,16 @@ Simply place the **fdiv** and **fadd** scripts in any directory in your search p
 
 - When `numerator > denominator,` the answer is composed from integral numerator/denominator result, followed by `remainder/denominator < 1,` which gives the digits after the decimal point. This maintains the 5E-19 precision even when more significant digits are used.
  
-	For example, `$( ./fdiv 500000 3 )` returns `166666.666666666666666667`
+For example, `fdiv 500000 3 ` returns `166666.666666666666666667`
 
 - When the denominator is divisible by 10, or its multiples, the decimal precision is further increased by the relevant number of decimal digits.
 
-	For example, `$( ./fdiv 5 30000 )` returns `0.0001666666666666666667`, where the truncation error is now less than 5E-22
+For example, `fdiv 5 30000` returns `0.0001666666666666666667`, where the truncation error is now less than 5E-22
 
 - Deals correctly with negative argument(s).
 
 ## References
 
-See comments in the source of **fdiv** for more details.
+See comments in the source of `fdiv` for more details.
 
 Here is a [blog](https://oldmill.cz/2020-01-02-the-joy-of-bashing.html) describing the magic idea behind implementing this using only Bash integer arithmetic.

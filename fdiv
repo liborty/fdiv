@@ -55,4 +55,3 @@ if [ $SIGN -lt 0 ]; then printf "-"; fi
 # padded with leading zeroes after the decimal point, if any
 # adding half the denominator to the numerator gives rounding to the nearest
 printf "%d.%0${PREC}d" $RAT $(( ($NUM+$DENOM/2)/$DENOM ))
-

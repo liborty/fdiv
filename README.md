@@ -20,11 +20,13 @@ Simply place the **fdiv** and **fadd** scripts in any directory in your search p
 ### Example Usage
 
 ```bash
-   fdiv -2 3; echo
-   -0.666666666666666667  
-   fadd 9.876543 0.987; echo
-   10.863543
- ```
+fdiv -2 3
+-0.666666666666666667  
+fdiv 355 113
+3.14159292035398230
+fadd 9.876543 0.987
+10.863543
+```
 
 ## Features
 

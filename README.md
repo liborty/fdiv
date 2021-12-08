@@ -30,21 +30,27 @@ fadd 9.876543 0.987
 
 ## Features
 
-- Checks arguments, returns errors if they are missing or not integers or the divisor (denominator) is zero.
+- Checks arguments, returns errors if they are missing or not integers or the divisor (denominator) is zero. Deals correctly with negative argument(s).
 
 - When the numerator is zero, 0.0 is immediately returned.
 
 - Automatically calculates with the maximum precision. Truncation error wil be less than 5E-19.
 
-- When `numerator > denominator,` the answer is composed from integral numerator/denominator result, followed by `remainder/denominator < 1,` which gives the digits after the decimal point. This maintains the 5E-19 precision even when more significant digits are used.
- 
-For example, `fdiv 500000 3 ` returns `166666.666666666666666667`
+- When `numerator > denominator,` then the answer is composed from numerator/denominator integer division, followed by the decimal point and then the upscaled remainder divided by the denominator, which gives the digits after the decimal point. This maintains the 5E-19 guaranteed precision even for some  quite large numbers. For example:
 
-- When the denominator is divisible by 10, or its multiples, the decimal precision is further increased by the relevant number of decimal digits.
+```bash
+fdiv $((2**63-1)) 3
+3074457345618258602.333333333333333333
+```
 
-For example, `fdiv 5 30000` returns `0.0001666666666666666667`, where the truncation error is now less than 5E-22
+- When the denominator is divisible by 10, or its multiples, then the decimal precision can be also increased, this time by the relevant number of zeroes inserted after the decimal point. For example, here the truncation error is now less than 5E-22:
 
-- Deals correctly with negative argument(s).
+```bash
+fdiv 5 30000
+0.0001666666666666666667
+```
+
+Note that this is not like Bignum package using an unlimited number of words and storage size, so barring the mod 10 trick, there are natural limits to the precision obtained: namely two 64 bit words. Still, that is quite a lot better than the 52 bits of the 'double precision' floating point standard.
 
 ## References
 

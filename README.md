@@ -34,7 +34,7 @@ fadd 9.876543 0.987
 
 - When the numerator is zero, 0.0 is immediately returned.
 
-- Automatically calculates with the maximum precision. Truncation error wil be less than 5E-19.
+- Automatically calculates with the maximum precision. Truncation error will be less than 5E-19.
 
 - When `numerator > denominator,` then the answer is composed from numerator/denominator integer division, followed by the decimal point and then the upscaled remainder divided by the denominator, which gives the digits after the decimal point. This maintains the 5E-19 guaranteed precision even for some  quite large numbers. For example:
 
